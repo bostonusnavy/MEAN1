@@ -9,7 +9,10 @@
   "author": "Rob DeGroot",
   "license": "ISC",
   "dependencies": {
+    "body-parser": "^1.12.0",
     "express": "^4.11.2",
-    "jade": "^1.9.1"
+    "jade": "^1.9.1",
+    "morgan": "^1.5.1",
+    "stylus": "^0.50.0"
   }
 }

@@ -1,17 +1,36 @@
 var express = require('express'),
-    home = require('./server/routes/home.js'),
-    customer = require('./server/routes/customer.js');
+    stylus = require('stylus'),
+    logger = require('morgan'),
+    bodyParser = require('body-parser');
 
 var env = process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 
 var app = express();
 
-console.log(__dirname);
+function compile(str, path) {
+    return stylus(str).set('filename', path);
+}
+
 app.set('views', __dirname + '/server/views');
 app.set('view engine', 'jade');
+app.use(logger('dev'));
+app.use(bodyParser());
+app.use(stylus.middleware(
+    {
+        src: __dirname + '/public',
+        compile: compile
+    }
+));
+app.use(express.static(__dirname + '/public'));
 
-app.get('/', home.index);
-app.get('/customer', customer.index);
-app.get('/customer/contact', customer.contact);
+app.get('/partials/:partialPath', function(req, res) {
+    res.render('partials/' + req.params.partialPath);
+});
 
-app.listen(3000);
+app.get('*', function(req, res) {
+    res.render('index');
+});
+
+var port = 3030;
+app.listen(port);
+console.log('Listening on port ' + port + '...');
