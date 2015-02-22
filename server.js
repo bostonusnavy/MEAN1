@@ -1,7 +1,8 @@
 var express = require('express'),
     stylus = require('stylus'),
     logger = require('morgan'),
-    bodyParser = require('body-parser');
+    bodyParser = require('body-parser'),
+    mongoose = require('mongoose');
 
 var env = process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 
@@ -21,16 +22,68 @@ app.use(stylus.middleware(
         compile: compile
     }
 ));
-app.use(express.static(__dirname + '/public'));
 
-app.get('/partials/:partialPath', function(req, res) {
+
+app.use(express.static(__dirname + '/public'));
+// Above string is used to serve up static files from the '/public' directory
+// - app folder
+// - css folder
+// - vender folder
+
+
+
+
+// =================================================================
+// app.use('*', function (req, res, next) {
+//    //generate random number between 0 and 10
+//    var howMuchRobSucks = (Math.random() * 10).toFixed(0);
+//    console.log('howMuchRobSucks: ' + howMuchRobSucks);
+//
+//    //if even
+//    if (howMuchRobSucks % 2 === 0) {
+//        console.log('rob sucks * ' + howMuchRobSucks);
+//    }
+//    //if divisible by 3
+//    else if (howMuchRobSucks % 3 === 0) {
+//        res.send(howMuchRobSucks);
+//    } else {
+//        res.send(howMuchRobSucks);
+//    }
+//
+//    else next
+//    next();
+//});
+// =================================================================
+
+
+if(env === 'development') {
+    mongoose.connect('mongodb://localhost:27017/MEAN1');
+}   else {
+    mongoose.connect('mongodb://rdegroot:mean1@ds047571.mongolab.com:47571/mean1');
+}
+var db = mongoose.connection;
+db.on('error', console.error.bind(console, 'Connection error...'));
+db.once('open', function callback () {
+   console.log('MEAN1 DB Opened!');
+});
+var messageSchema = mongoose.Schema({message: String});
+var Message = mongoose.model('Message', messageSchema);
+var mongoMessage;
+Message.findOne().exec(function(err, messageDoc) {
+   mongoMessage = messageDoc.message;
+});
+
+
+app.get('/partials/:partialPath', function (req, res) {
     res.render('partials/' + req.params.partialPath);
 });
 
-app.get('*', function(req, res) {
-    res.render('index');
+app.get('*', function (req, res) {
+    res.render('index', {
+        mongoMessage: mongoMessage
+    });
 });
 
-var port = 3030;
+var port = process.env.PORT || 3030;
 app.listen(port);
 console.log('Listening on port ' + port + '...');

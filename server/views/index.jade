@@ -1,5 +1,10 @@
 extends ../includes/layout
 
+//"main-content" is a variable name, appended to layout.jade
 block main-content
+    // ".content" is a CSS class name, will inherit values from stylesheet
     section.content
+        // "(ng-view)" directive that specifies area of placement for
+        // angular content [app.js] to angular-route [ngRoute]
         div(ng-view)
+    h2= mongoMessage
