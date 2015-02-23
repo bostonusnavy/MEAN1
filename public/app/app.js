@@ -8,7 +8,7 @@ angular.module('app').config(function($routeProvider, $locationProvider) {
     $routeProvider
         // "templateURL:" places file specified into "(ng-view)"
         // "controller:" specifies which controller to use
-        .when('/', { templateUrl: '/partials/main', controller: 'meanMainCtrl'});
+        .when('/', { templateUrl: '/partials/main/main', controller: 'meanMainCtrl'});
         // you can '.' chain several "whens" together to handle different front-side routes before ';'
 });
 

@@ -23,38 +23,11 @@ app.use(stylus.middleware(
     }
 ));
 
-
 app.use(express.static(__dirname + '/public'));
 // Above string is used to serve up static files from the '/public' directory
 // - app folder
 // - css folder
 // - vender folder
-
-
-
-
-// =================================================================
-// app.use('*', function (req, res, next) {
-//    //generate random number between 0 and 10
-//    var howMuchRobSucks = (Math.random() * 10).toFixed(0);
-//    console.log('howMuchRobSucks: ' + howMuchRobSucks);
-//
-//    //if even
-//    if (howMuchRobSucks % 2 === 0) {
-//        console.log('rob sucks * ' + howMuchRobSucks);
-//    }
-//    //if divisible by 3
-//    else if (howMuchRobSucks % 3 === 0) {
-//        res.send(howMuchRobSucks);
-//    } else {
-//        res.send(howMuchRobSucks);
-//    }
-//
-//    else next
-//    next();
-//});
-// =================================================================
-
 
 if(env === 'development') {
     mongoose.connect('mongodb://localhost:27017/MEAN1');
@@ -73,9 +46,8 @@ db.once('open', function callback () {
 //   mongoMessage = messageDoc.message;
 //});
 
-
-app.get('/partials/:partialPath', function (req, res) {
-    res.render('partials/' + req.params.partialPath);
+app.get('/partials/*', function (req, res) {
+    res.render('../../public/app/' + req.params[0]);
 });
 
 app.get('*', function (req, res) {
