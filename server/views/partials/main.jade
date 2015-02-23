@@ -1,2 +1,10 @@
-h1 This is a Partial
-h2 {{ myVar }}
+.container
+    .jumbotron
+        h1 The MEAN1 MEANStack
+        p Welcome to a presentation of the MEAN Stack, displayed in SPA! The first iteration of many to come, behold!
+
+    .row
+        .col-md-6
+            div(ng-include="'/partials/featured-courses'")
+        .col-md-6
+            div(ng-include="'/partials/new-courses'")

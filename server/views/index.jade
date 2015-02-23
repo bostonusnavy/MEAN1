@@ -2,9 +2,22 @@ extends ../includes/layout
 
 //"main-content" is a variable name, appended to layout.jade
 block main-content
+    //.navbar.navbar-inverse.navbar-fixed-top
+    .navbar.navbar-fixed-top
+        .container
+            .navbar-header
+                a.navbar-brand(href="/") MEAN1
+                    h6 MEAN stack called MEAN1
+            .navbar-collapse.collapse
+                ul.nav.navbar-nav
+                    li
+                        a(href="/") Home
+
     // ".content" is a CSS class name, will inherit values from stylesheet
     section.content
         // "(ng-view)" directive that specifies area of placement for
         // angular content [app.js] to angular-route [ngRoute]
         div(ng-view)
-    h2= mongoMessage
+
+    footer.container.text-center
+        p &copy; 2015 MEAN1 (MEANStack) Corp Int'l Ltd.
