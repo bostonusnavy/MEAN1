@@ -20,7 +20,12 @@ module.exports = function (app, config) {
     app.use(bodyParser.urlencoded({
         extended: true
     }));
-    app.use(session({secret: 'MEAN1 unicorns'}));
+    app.use(session({
+        secret: 'MEAN1 unicorns',
+        saveUninitialized: true,
+        resave: true
+    }));
+    //app.use(session({secret: 'MEAN1 unicorns'})); -- Edited due to session deprecation Express 4.x
     app.use(passport.initialize());
     app.use(passport.session());
     app.use(stylus.middleware(
