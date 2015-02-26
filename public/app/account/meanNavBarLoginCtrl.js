@@ -1,12 +1,12 @@
-angular.module('app').controller('meanNavBarLoginCtrl', function($scope, $http, meanIdentity, meanNotifier) {
+angular.module('app').controller('meanNavBarLoginCtrl', function($scope, $http, meanIdentity, meanNotifier, meanAuth) {
+    $scope.identity = meanIdentity;
     $scope.signin = function(username, password) {
-        $http.post('/login', {username:username, password:password}).then(function (response) {
-            if(response.data.success) {
-                meanIdentity.currentUser = response.data.user;
+        meanAuth.authenticateUser(username, password).then(function (success) {
+            if(success) {
                 meanNotifier.notify('You have successfully logged in!');
             } else {
                 meanNotifier.notify('Login failed. Incorrect Username and/or Password');
             }
-        })
+        });
     }
 });
