@@ -5,7 +5,7 @@ angular.module('app').controller('meanNavBarLoginCtrl', function($scope, $http, 
                 meanIdentity.currentUser = response.data.user;
                 meanNotifier.notify('You have successfully logged in!');
             } else {
-                meanNotifier.notify('Incorrect Username and/or Password');
+                meanNotifier.notify('Login failed. Incorrect Username and/or Password');
             }
         })
     }
