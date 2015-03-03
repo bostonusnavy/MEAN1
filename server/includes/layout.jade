@@ -8,6 +8,7 @@ html
         link(rel="stylesheet", href="/vendor/toastr/toastr.css")
         link(rel="stylesheet", href="/css/site.css")
     body(ng-app="app")
+        include currentUser
         // "main-content" is a variable name, prepended to index.jade
         block main-content
         // "include" is jade syntax, a call to send all .jade files specified after tag

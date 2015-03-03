@@ -11,6 +11,14 @@ angular.module('app').factory('meanAuth', function ($http, meanIdentity, $q) {
                 }
             });
             return dfd.promise;
+        },
+        logoutUser: function() {
+            var dfd = $q.defer();
+            $http.post('/logout', {logout: true}).then(function () {
+                meanIdentity.currentUser = undefined;
+                dfd.resolve();
+            });
+            return dfd.promise;
         }
     }
 });
