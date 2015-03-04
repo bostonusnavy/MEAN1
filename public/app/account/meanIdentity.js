@@ -1,7 +1,8 @@
-angular.module('app').factory('meanIdentity', function ($window) {
+angular.module('app').factory('meanIdentity', function ($window, meanUser) {
     var currentUser;
     if (!!$window.bootstrappedUserObject) {
-        currentUser = bootstrappedUserObject;
+        currentUser = new meanUser();
+        angular.extend(currentUser, $window.bootstrappedUserObject);
     }
     return {
         currentUser: currentUser,
