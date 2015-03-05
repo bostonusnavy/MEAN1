@@ -28,7 +28,21 @@ angular.module('app').factory('meanAuth', function ($http, meanIdentity, $q, mea
 
             return dfd.promise;
         },
-        
+
+        updateCurrentUser: function (newUserData) {
+            var dfd = $q.defer();
+
+            var clone = angular.copy(meanIdentity.currentUser);
+            angular.extend(clone, newUserData);
+            clone.$update().then(function () {
+                meanIdentity.currentUser = clone;
+                dfd.resolve();
+            }, function (response) {
+                dfd.reject(response.data.reason)
+            });
+            return dfd.promise;
+        },
+
         logoutUser: function() {
             var dfd = $q.defer();
             $http.post('/logout', {logout: true}).then(function () {
@@ -39,6 +53,13 @@ angular.module('app').factory('meanAuth', function ($http, meanIdentity, $q, mea
         },
         authorizeCurrentUserForRoute: function(role) {
             if(meanIdentity.isAuthorized(role)) {
+                return true;
+            } else {
+                return $q.reject('Not Authorized');
+            }
+        },
+        authorizeAuthenticatedUserForRoute: function() {
+            if(meanIdentity.isAuthenticated()) {
                 return true;
             } else {
                 return $q.reject('Not Authorized');
