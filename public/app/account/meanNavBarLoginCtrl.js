@@ -13,7 +13,7 @@ angular.module('app').controller('meanNavBarLoginCtrl', function($scope, $http, 
         meanAuth.logoutUser().then(function () {
             $scope.username = "";
             $scope.password = "";
-            meanNotifier.notify("You have successdfully logged out!");
+            meanNotifier.notify("You have successfully logged out!");
             $location.path('/');
         })
     }
