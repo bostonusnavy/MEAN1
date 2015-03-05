@@ -21,6 +21,13 @@ angular.module('app').factory('meanAuth', function ($http, meanIdentity, $q, mea
                 dfd.resolve();
             });
             return dfd.promise;
+        },
+        authorizeCurrentUserForRoute: function(role) {
+            if(meanIdentity.isAuthorized(role)) {
+                return true;
+            } else {
+                return $q.reject('Not Authorized');
+            }
         }
     }
 });
