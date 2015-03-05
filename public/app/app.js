@@ -14,8 +14,8 @@ angular.module('app').config(function($routeProvider, $locationProvider) {
     $routeProvider
         .when('/', { templateUrl: '/partials/main/main', controller: 'meanMainCtrl'})
         .when('/admin/users', { templateUrl: '/partials/admin/user-list',
-            controller: 'meanUserListCtrl', resolve: routeRoleChecks.admin
-        });
+            controller: 'meanUserListCtrl', resolve: routeRoleChecks.admin})
+        .when('/signup', { templateUrl: '/partials/account/signup', controller: 'meanSignupCtrl'});
 });
 
 angular.module('app').run(function ($rootScope, $location) {
