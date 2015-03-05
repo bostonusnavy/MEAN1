@@ -2,7 +2,7 @@ angular.module('app', ['ngResource', 'ngRoute']);
 
 angular.module('app').config(function($routeProvider, $locationProvider) {
     $locationProvider.html5Mode({
-       enable: true,
+       enabled: true,
        requireBase: false
     });
     $routeProvider
