@@ -3,7 +3,7 @@ extends ../includes/layout
 //"main-content" is a variable name, appended to layout.jade
 block main-content
     //.navbar.navbar-inverse.navbar-fixed-top
-    .navbar.navbar-fixed-top
+    .navbar.navbar-inverse.navbar-fixed-top
         .container
             .navbar-header
                 a.navbar-brand(href="/") MEAN1
@@ -12,14 +12,8 @@ block main-content
                 ul.nav.navbar-nav
                     li
                         a(href="/") Home
-                    //li
-                    //    a(href="/") NavItem1
-                    //li
-                    //    a(href="/") NavItem2
-                    //li
-                    //    a(href="/") NavItem3
-                    //li
-                    //    a(href="/") NavItem4
+                    li
+                        a(href="/courses") Courses
                 div(ng-include="'partials/account/navbar-login'")
 
     // ".content" is a CSS class name, will inherit values from stylesheet

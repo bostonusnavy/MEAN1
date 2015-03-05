@@ -21,7 +21,9 @@ angular.module('app').config(function($routeProvider, $locationProvider) {
         .when('/signup', { templateUrl: '/partials/account/signup',
             controller: 'meanSignupCtrl'})
         .when('/profile', { templateUrl: '/partials/account/profile',
-            controller: 'meanProfileCtrl', resolve: routeRoleChecks.user});
+            controller: 'meanProfileCtrl', resolve: routeRoleChecks.user})
+        .when('/courses', { templateUrl: '/partials/courses/course-list',
+            controller: 'meanCourseListCtrl'})
 });
 
 angular.module('app').run(function ($rootScope, $location) {
